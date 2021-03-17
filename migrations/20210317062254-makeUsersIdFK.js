@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.addConstraint('users_items', {
       fields: ['users_id'],
       type: 'foreign key',
-      name: 'custom_fkey_constraint_name',
+      name: 'custom_fkey_constraint_users_id',
       references: {
         table: 'users',
         field: 'id'
@@ -16,6 +16,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await removeConstrait('users_items', 'custom_fkey_constraint_name')
+    await removeConstrait('users_items', 'custom_fkey_constraint_users_id')
   }
 };
