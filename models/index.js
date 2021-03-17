@@ -36,21 +36,21 @@ db.Sequelize = Sequelize;
 
 // 일대다
 // users_items <-> items, users <-> users_items, users <-> board, board <-> images, board <-> comment
-const { board, comment, image, items, user, users_item } = sequelize.model;
+const { Board, Comment, Image, Items, User, Users_Item } = sequelize.models;
 
-board.hasMany(comment);
-comment.belongsTo(board);
+Board.hasMany(Comment);
+Comment.belongsTo(Board);
 
-board.hasMany(image);
-image.belongsTo(board);
+Board.hasMany(Image);
+Image.belongsTo(Board);
 
-user.hasMany(board);
-board.belongsTo(user);
+User.hasMany(Board);
+Board.belongsTo(User);
 
-user.hasMany(users_item);
-users_item.belongsTo(user);
+User.hasMany(Users_Item);
+Users_Item.belongsTo(User);
 
-items.hasMany(users_item);
-users_item.belongsTo(items);
+Items.hasMany(Users_Item);
+Users_Item.belongsTo(Items);
 
 module.exports = db;

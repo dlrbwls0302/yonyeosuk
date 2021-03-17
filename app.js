@@ -2,8 +2,9 @@ const express = require('express');
 //const router = require('./Routes');
 const cors = require('cors');
 const controller = require('./controllers');
-const user = require('./models').User
-const board = require('./models').Board
+//const { User } = require('./models/user.js');
+const { Board } = require('./models');
+//console.log(Board)
 
 const app = express();
 const port = 5000;
@@ -13,9 +14,9 @@ app.use(express.json());
 
 // 서버 연결 성공시
 app.get('/', (req, res) => {
-    board.findAll({
+    Board.findAll({
         where: {
-            users_id: 1 
+            users_id: 1
         }
     })
     .then(res => console.log(res))
