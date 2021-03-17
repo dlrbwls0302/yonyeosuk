@@ -19,4 +19,3 @@ app.get('/', (req, res) => {
 module.exports = app.listen(port, () => {
     console.log(`Server is starting on ${port}`);
 })
-
