@@ -1,5 +1,5 @@
 const express = require('express');
-const router = require('./Routes');
+//const router = require('./Routes');
 const cors = require('cors');
 const controller = require('./controllers');
 
@@ -20,15 +20,3 @@ module.exports = app.listen(port, () => {
     console.log(`Server is starting on ${port}`);
 })
 
-const dotenv = require('dotenv');
-dotenv.config();
-
-development: {
-    host: process.env.DATABASE_HOST,
-    username: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: 'thiscook_server',
-    dialect: 'mysql',
-    logging: false,
-    port: 3306
-}
