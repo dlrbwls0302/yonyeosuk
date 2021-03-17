@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addConstraint('board', {
+    await queryInterface.addConstraint('boards', {
       fields: ['users_id'],
       type: 'foreign key',
       name: 'custom_fkey_constraint_name',
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await removeConstraint('board', 'custom_fkey_constraint_name')
+    await queryInterface.removeConstraint('boards', 'custom_fkey_constraint_name')
   }
 
 };

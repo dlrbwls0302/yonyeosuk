@@ -16,6 +16,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await removeConstrait('users_items', 'custom_fkey_constraint_item_id')
+    await queryInterface.removeConstraint('users_items', 'custom_fkey_constraint_item_id')
   }
 };

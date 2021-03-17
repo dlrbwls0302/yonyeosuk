@@ -1,7 +1,10 @@
 'use strict';
+
+const { defaultValueSchemable } = require("sequelize/types/lib/utils");
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('comment', {
+    await queryInterface.createTable('comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,11 +17,13 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      like: {
-        type: Sequelize.INTEGER
+      comment_like: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
-      dislike: {
-        type: Sequelize.INTEGER
+      comment_dislike: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +36,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('comment');
+    await queryInterface.dropTable('comments');
   }
 };

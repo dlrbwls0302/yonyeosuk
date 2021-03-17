@@ -2,8 +2,8 @@ const express = require('express');
 const router = require('./Routes');
 const cors = require('cors');
 const controller = require('./controllers');
-const user = require('./models').User
-const board = require('./models').Board
+const { user } = require('./models')
+const { board } = require('./models')
 
 const app = express();
 const port = 5000;

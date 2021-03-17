@@ -15,13 +15,19 @@ module.exports = (sequelize, DataTypes) => {
   };
   Board.init({
     users_id: DataTypes.INTEGER,
-    like: DataTypes.INTEGER,
-    dislike: DataTypes.INTEGER,
+    post_like: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    post_dislike: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
     title: DataTypes.STRING,
     description: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Board',
+    modelName: 'board',
   });
   return Board;
 };
