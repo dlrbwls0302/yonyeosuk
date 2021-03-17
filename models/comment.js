@@ -16,11 +16,17 @@ module.exports = (sequelize, DataTypes) => {
   Comment.init({
     board_id: DataTypes.INTEGER,
     description: DataTypes.STRING,
-    like: DataTypes.INTEGER,
-    dislike: DataTypes.INTEGER
+    comment_like: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0    
+    },
+    comment_dislike: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0    
+    }
   }, {
     sequelize,
-    modelName: 'Comment',
+    modelName: 'comment',
   });
   return Comment;
 };
