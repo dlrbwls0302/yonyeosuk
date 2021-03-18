@@ -5,7 +5,10 @@ const { user } = require('./models');
 const { board } = require('./models');
 
 // Router
-const { userRouter, searchRouter, boardRouter } = require('./Routes');
+
+const userRouter = require('./Routes/userRouter');
+const userRouter = require('./Routes/searchRouter');
+const userRouter = require('./Routes/boardRouter');
 
 const app = express();
 const port = 5000;

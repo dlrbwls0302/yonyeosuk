@@ -1,24 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const boardController = require('../controllers/boardController'); 
 
-router.get('/', (req, res) => {
-    res.send('연결되었습니다')
-})
+router.get('/', boardController.getBoard)
 
-router.get('/:postid', (req, res) => {
-    res.send('연결되었습니다')
-})
+router.get('/:postid', boardController.getPost)
 
-router.get('/post/:id', (req, res) => {
-    res.send('연결되었습니다')
-})
+router.post('/post/:id', boardController.writePost)
 
-router.get('/update/:postid', (req, res) => {
-    res.send('연결되었습니다')
-})
+router.post('/update/:postid', boardController.updatePost)
 
-router.get('/delete/:postid', (req, res) => {
-    res.send('연결되었습니다')
-})
+router.post('/delete/:postid', boardController.deletePost)
 
 module.exports = router;

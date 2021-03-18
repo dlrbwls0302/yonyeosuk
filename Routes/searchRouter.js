@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const searchController = require('../controllers/searchController');
 
-router.get('/', (req, res) => {
-    res.send('연결되었습니다')
-})
+router.post('/', searchController.serachPost)
 
 module.exports = router;
