@@ -39,7 +39,34 @@ module.exports = {
         })
     },
     signup: async (req, res) => {
-        
+        // email, pw, nickname
+        const { email, password, nickname } = req.body
+        user.findOne({
+            where: {
+                email: email
+            }
+        })
+        .then((userInfo) => {
+            if (userInfo) {
+                res.status(409).json({
+                    message: '이미 존재하는 이메일입니다'
+                })
+            } else {
+                user.create({
+                    email: email,
+                    password: password,
+                    nickname: nickname            
+                })
+                .then((createdUserInfo) => {
+                    if (createdUserInfo) {
+                        res.status(201).json({
+                            message: 'Successfully signed up!'
+                        })
+                    } 
+                })
+                .catch(err => console.log(err))
+            }
+        })
     },
     signout: async (req, res) => {
         
