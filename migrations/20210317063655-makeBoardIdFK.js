@@ -7,7 +7,7 @@ module.exports = {
       type: 'foreign key',
       name: 'custom_fkey_constraint_board_id2',
       references: {
-        table: 'board',
+        table: 'boards',
         field: 'id'
       },
       onDelete: 'cascade',
@@ -16,6 +16,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await removeConstrait('images', 'custom_fkey_constraint_board_id2')
+    await queryInterface.removeConstraint('images', 'custom_fkey_constraint_board_id2')
   }
 };

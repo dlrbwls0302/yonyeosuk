@@ -2,12 +2,12 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addConstraint('comment', {
+    await queryInterface.addConstraint('comments', {
       fields: ['board_id'],
       type: 'foreign key',
       name: 'custom_fkey_constraint_board_id',
       references: {
-        table: 'board',
+        table: 'boards',
         field: 'id'
       },
       onDelete: 'cascade',
@@ -16,6 +16,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await removeConstrait('comment', 'custom_fkey_constraint_board_id')
+    await queryInterface.removeConstraint('comments', 'custom_fkey_constraint_board_id')
   }
 };

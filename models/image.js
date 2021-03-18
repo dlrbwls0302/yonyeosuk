@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.BLOB
   }, {
     sequelize,
-    modelName: 'Image',
+    modelName: 'image',
   });
   return Image;
 };
