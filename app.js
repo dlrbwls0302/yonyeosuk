@@ -1,9 +1,12 @@
 const express = require('express');
-const router = require('./Routes');
+const router = express.Router();
 const cors = require('cors');
 const controller = require('./controllers');
-const { user } = require('./models')
-const { board } = require('./models')
+const { user } = require('./models');
+const { board } = require('./models');
+
+// Router
+const { userRouter, searchRouter, boardRouter } = require('./Routes');
 
 const app = express();
 const port = 5000;
@@ -26,6 +29,10 @@ app.get('/', (req, res) => {
         response: '연결에 성공하였습니다!'
     })
 })
+
+app.use('/user', userRouter);
+app.use('/board', boardRouter);
+app.use('/search', searchRouter);
 
 module.exports = app.listen(port, () => {
     console.log(`Server is starting on ${port}`);
