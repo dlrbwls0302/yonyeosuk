@@ -14,6 +14,9 @@ app.use(express.json());
 // 서버 연결 성공시
 app.get('/', (req, res) => {
     board.findAll({
+        attributes: {
+            exclude: ['userId']
+        },
         where: {
             users_id: 1 
         }
