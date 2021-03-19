@@ -21,7 +21,7 @@ module.exports = {
      * await queryInterface.dropTable('users');
      *
      */
-     await queryInterface.changeColumn('images', 'image', {
+    await queryInterface.changeColumn('images', 'image', {
       type: Sequelize.BLOB
     })
   }
