@@ -16,8 +16,8 @@ module.exports = {
                 description: description,
                 users_id: req.params.id
             })
-            res.send('testing')
             console.log(usersPostId)
+            res.send('testing')
 
             const images = req.files;
             const path = images.map(image => {
