@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const bodyParser = require("body-parser")
+const parser = bodyParser.urlencoded({extended:false});
 const boardController = require('../controllers/boardController');
 const multer = require('multer');
 const upload = multer({
@@ -11,7 +13,7 @@ router.get('/', boardController.getBoard)
 
 router.get('/:postid', boardController.getPost)
 
-router.post('/post/:id', accessTokenMiddleware.isValidToken, upload.array('image'), boardController.writePost)
+router.post('/post/:id', accessTokenMiddleware.isValidToken, upload.array('image'), parser, boardController.writePost)
 
 router.post('/update/:postid', accessTokenMiddleware.isValidToken, boardController.updatePost)
 
