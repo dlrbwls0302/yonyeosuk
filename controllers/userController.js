@@ -1,5 +1,7 @@
-const { user } = require("../models/user");
+const { user } = require("../models");
 const jwt = require("jsonwebtoken");
+const dotenv = require('dotenv');
+dotenv.config()
 
 module.exports = {
     login: async (req, res) => {
@@ -34,9 +36,9 @@ module.exports = {
             })
         
         }
-        res.status(500).json({
-            message: 'Server error has occured'
-        })
+       // res.status(500).json({
+       //     message: 'Server error has occured'
+       // })
     },
     signup: async (req, res) => {
         // email, pw, nickname
@@ -71,17 +73,17 @@ module.exports = {
     signout: async (req, res) => {
         const authorization = req.headers['authorization'];
         if(authorization){
-            const accessToken = req.headers.split(' ')[1];
+            const accessToken = authorization.split(' ')[1];
             jwt.verify(accessToken, process.env.ACCESS_SECRET, async(error, decoded) => {
                 if(error){
                     res.status(401).json({
                         message: 'Invalid access token'
                     })
                 } else{
-                    const user = await user.findOne({
+                    const userInfo = await user.findOne({
                         where: { id: decoded.id }
                     })
-                    if(!user){
+                    if(!userInfo){
                         res.status(404).json({
                             message: 'Invalid user' 
                         })
@@ -94,9 +96,9 @@ module.exports = {
                 }
             })
         }
-        res.status(500).json({
-            message: 'Server error has occurred'
-        })
+       // res.status(500).json({
+       //     message: 'Server error has occurred'
+       // })
         
     },
     socialLogin: async (req, res) => {

@@ -50,7 +50,7 @@ board.belongsTo(user);
 user.hasMany(users_item);
 users_item.belongsTo(user);
 
-items.hasMany(users_item);
-users_item.belongsTo(items);
+item.hasMany(users_item);
+users_item.belongsTo(item);
 
 module.exports = db;
