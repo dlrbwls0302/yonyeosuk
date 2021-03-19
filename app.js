@@ -1,15 +1,13 @@
 const express = require('express');
-const router = express.Router();
 const cors = require('cors');
-const controller = require('./controllers');
 const { user } = require('./models');
 const { board } = require('./models');
 
 // Router
 
 const userRouter = require('./Routes/userRouter');
-const userRouter = require('./Routes/searchRouter');
-const userRouter = require('./Routes/boardRouter');
+const searchRouter = require('./Routes/searchRouter');
+const boardRouter = require('./Routes/boardRouter');
 
 const app = express();
 const port = 5000;
