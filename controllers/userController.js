@@ -71,35 +71,10 @@ module.exports = {
         })
     },
     signout: async (req, res) => {
-        const authorization = req.headers['authorization'];
-        if(authorization){
-            const accessToken = authorization.split(' ')[1];
-            jwt.verify(accessToken, process.env.ACCESS_SECRET, async(error, decoded) => {
-                if(error){
-                    res.status(401).json({
-                        message: 'Invalid access token'
-                    })
-                } else{
-                    const userInfo = await user.findOne({
-                        where: { id: decoded.id }
-                    })
-                    if(!userInfo){
-                        res.status(404).json({
-                            message: 'Invalid user' 
-                        })
-                    } else{
-                        res.clearCookie('refreshToken');
-                        res.status(200).json({
-                            message: 'Successfully signed out!'
-                        })
-                    }
-                }
-            })
-        }
-       // res.status(500).json({
-       //     message: 'Server error has occurred'
-       // })
-        
+        res.clearCookie('refreshToken');
+        res.status(200).json({
+            message: 'Successfully signed out!'    
+        })
     },
     socialLogin: async (req, res) => {
         
