@@ -3,17 +3,23 @@ const { board } = require("../models");
 
 module.exports = {
     getBoard: async (req, res) => {
-        const boardData = await board.findAll();
-        const reversedBoard = boardData.dataValues;
-        reversedBoard.reverse();
+        const boardData = await board.findAll({
+	  attributes: {
+            exclude: ['userId']
+          }
+        });
+        boardData.reverse();
+       
         const startNum = (req.body.page - 1) * 20;
         const endNum = startNum + 20;
-        const slicedBoards = reversedBoard.slice(startNum, endNum);
+
+        const slicedBoards = boardData.slice(startNum, endNum);
         const result = slicedBoards.map(slicedBoard => {
+            console.log(slicedBoard.dataValues);
             return {
-                id: slicedBoard.id,
-                title: slicedBoard.title,
-                createdAt: slicedBoard.createdAt
+                id: slicedBoard.dataValues.id,
+                title: slicedBoard.dataValues.title,
+                createdAt: slicedBoard.dataValues.createdAt
             }
         })
         res.status(200).json({
