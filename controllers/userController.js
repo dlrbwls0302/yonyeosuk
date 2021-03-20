@@ -21,7 +21,7 @@ module.exports = {
               }],
               where: { id: userInfo.dataValues.id }
            })
-           .then(res => console.log(res))
+           .then(res => console.log(res.dataValues.items))
            .catch(err => console.log(err))
 
             const payload = {
