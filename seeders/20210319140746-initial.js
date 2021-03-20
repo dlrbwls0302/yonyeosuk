@@ -1,6 +1,6 @@
 'use strict';
 
-const { DESCRIBE } = require("sequelize/types/lib/query-types");
+//const { DESCRIBE } = require("sequelize/types/lib/query-types");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -118,6 +118,33 @@ module.exports = {
       },
     ])
 
+ await queryInterface.bulkInsert('items', [
+      {
+        name: '두부'
+      },
+      {
+        name: '김치'
+      },
+      {
+        name: '양파'
+      },
+      {
+        name: '파스타면'
+      },
+      {
+        name: '크림소스'
+      },
+      {
+        name: '베이컨'
+      },
+      {
+        name: '치즈'
+      },
+      {
+        name: '토마토'
+      },
+    ])
+
     await queryInterface.bulkInsert('users_items', [
       {
         users_id: 1,
@@ -164,36 +191,7 @@ module.exports = {
         item_id: 8
       },
     ])
-
-    await queryInterface.bulkInsert('items', [
-      {
-        name: '두부'
-      },
-      {
-        name: '김치'
-      },
-      {
-        name: '양파'
-      },
-      {
-        name: '파스타면'
-      },
-      {
-        name: '크림소스'
-      },
-      {
-        name: '베이컨'
-      },
-      {
-        name: '치즈'
-      },
-      {
-        name: '토마토'
-      },
-    ])
   },
-
-  
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.bulkDelete('users', null, {});
