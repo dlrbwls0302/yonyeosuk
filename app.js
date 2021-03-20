@@ -4,11 +4,9 @@ const { user } = require('./models');
 const { board } = require('./models');
 //const bodyParser = require('body-parser');
 // Router
-
 const userRouter = require('./Routes/userRouter');
 const searchRouter = require('./Routes/searchRouter');
 const boardRouter = require('./Routes/boardRouter');
-
 const app = express();
 const port = 5000;
 
