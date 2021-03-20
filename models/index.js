@@ -47,7 +47,7 @@ image.belongsTo(board, { foreignKey: 'board_id' });
 user.hasMany(board, { foreignKey: 'users_id' });
 board.belongsTo(user, { foreignKey: 'users_id' });
 
-user.belongsToMany(item, { through: 'UserItems' })
-item.belongsToMany(user, { through: 'UserItems' } )
+user.belongsToMany(item, { through: 'UserItems' });
+item.belongsToMany(user, { through: 'UserItems' });
 
 module.exports = db;
