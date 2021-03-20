@@ -50,4 +50,7 @@ board.belongsTo(user);
 user.belongsToMany(item, { through: 'UserItems' })
 item.belongsToMany(user, { through: 'UserItems' } )
 
+//user.hasMany(item);
+//item.belongsToMany(user, { through: users_item });
+
 module.exports = db;
