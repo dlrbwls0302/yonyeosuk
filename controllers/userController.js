@@ -1,4 +1,4 @@
-const { user } = require("../models");
+const { user, item } = require("../models");
 const jwt = require("jsonwebtoken");
 const dotenv = require('dotenv');
 dotenv.config()
@@ -13,6 +13,17 @@ module.exports = {
                 'message': 'Invalid user'
             })
         } else{
+            const userItem = await user.findAll({
+                include: [
+                    {
+                        model: item,
+                        attributes: ['name']
+                    }
+                ],
+                where: { id: userInfo.dataValues.id }
+            });
+            console.log("userItem: ", userItem);
+
             const payload = {
                 ...userInfo.dataValues
             }
@@ -36,12 +47,9 @@ module.exports = {
             })
         
         }
-       // res.status(500).json({
-       //     message: 'Server error has occured'
-       // })
+
     },
     signup: async (req, res) => {
-        // email, pw, nickname
         const { email, password, nickname } = req.body
         user.findOne({
             where: {

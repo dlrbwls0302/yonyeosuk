@@ -47,10 +47,7 @@ image.belongsTo(board);
 user.hasMany(board);
 board.belongsTo(user);
 
-user.hasMany(users_item);
-users_item.belongsTo(user);
-
-item.hasMany(users_item);
-users_item.belongsTo(item);
+user.hasMany(item);
+item.belongsToMany(user, { through: users_item });
 
 module.exports = db;
