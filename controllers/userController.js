@@ -13,31 +13,16 @@ module.exports = {
                 'message': 'Invalid user'
             })
         } else{
-           /* user.findAll({
-                include: [
-                    {
-                        model: item,
-                        attributes: {
-                           include: ['name']
-                          // name: ['image', 'userId']
-                        }
-                    }
-                ],
-                where: { id: userInfo.dataValues.id }
-            })
-            .catch(err => console.log(err))
-            */
-	    user.findAll({
-              include: [
-                {
-                  model: users_item,
-                  attributes: ['users_id', 'item_id']
-                }
-              ],
+            user.findOne({
+              include: [{
+                model: item,
+                attributes: ['id', 'name'],
+                through: { where: { userId: userInfo.dataValues.id } }
+              }],
               where: { id: userInfo.dataValues.id }
-            })
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+           })
+           .then(res => console.log(res))
+           .catch(err => console.log(err))
 
             const payload = {
                 ...userInfo.dataValues
