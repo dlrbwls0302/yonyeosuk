@@ -38,14 +38,14 @@ db.Sequelize = Sequelize;
 // users_items <-> items, users <-> users_items, users <-> board, board <-> images, board <-> comment
 const { board, comment, image, item, user } = sequelize.models;
 
-board.hasMany(comment, { foreignKey: 'board_id' });
-comment.belongsTo(board, { foreignKey: 'board_id' });
+board.hasMany(comment);
+comment.belongsTo(board);
 
-board.hasMany(image, { foreignKey: 'board_id' });
-image.belongsTo(board, { foreignKey: 'board_id' });
+board.hasMany(image);
+image.belongsTo(board);
 
-user.hasMany(board, { foreignKey: 'users_id' });
-board.belongsTo(user, { foreignKey: 'users_id' });
+user.hasMany(board);
+board.belongsTo(user);
 
 user.belongsToMany(item, { through: 'UserItems' });
 item.belongsToMany(user, { through: 'UserItems' });

@@ -145,7 +145,7 @@ module.exports = {
       },
     ])
 
-    await queryInterface.bulkInsert('UserItems', [
+  /*  await queryInterface.bulkInsert('UserItems', [
       {
         userId: 1,
         itemId: 1
@@ -190,7 +190,7 @@ module.exports = {
         userId: 3,
         itemId: 8
       },
-    ])
+    ]) */
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -198,7 +198,7 @@ module.exports = {
     await queryInterface.bulkDelete('boards', null, {});
     await queryInterface.bulkDelete('comments', null, {});
     await queryInterface.bulkDelete('images', null, {});
-    await queryInterface.bulkDelete('UserItems', null, {});
+   // await queryInterface.bulkDelete('UserItems', null, {});
     await queryInterface.bulkDelete('items', null, {});
   }
 };
