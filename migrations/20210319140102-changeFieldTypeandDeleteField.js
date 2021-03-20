@@ -15,7 +15,7 @@ module.exports = {
       type: Sequelize.BLOB
     })
 
-    await queryInterface.removeColumn('items', 'image', {
+    await queryInterface.addColumn('items', 'image', {
       type: Sequelize.STRING
     })
     
