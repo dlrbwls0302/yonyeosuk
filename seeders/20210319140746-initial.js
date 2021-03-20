@@ -145,50 +145,50 @@ module.exports = {
       },
     ])
 
-    await queryInterface.bulkInsert('users_items', [
+    await queryInterface.bulkInsert('UserItems', [
       {
-        users_id: 1,
-        item_id: 1
+        userId: 1,
+        itemId: 1
       },
       {
-        users_id: 1,
-        item_id: 2
+        userId: 1,
+        itemId: 2
       },
       {
-        users_id: 1,
-        item_id: 3
+        userId: 1,
+        itemId: 3
       },
       {
-        users_id: 2,
-        item_id: 1
+        userId: 2,
+        itemId: 1
       },
       {
-        users_id: 2,
-        item_id: 2
+        userId: 2,
+        itemId: 2
       },
       {
-        users_id: 2,
-        item_id: 3
+        userId: 2,
+        itemId: 3
       },
       {
-        users_id: 2,
-        item_id: 4
+        userId: 2,
+        itemId: 4
       },
       {
-        users_id: 2,
-        item_id: 5
+        userId: 2,
+        itemId: 5
       },
       {
-        users_id: 3,
-        item_id: 6
+        userId: 3,
+        itemId: 6
       },
       {
-        users_id: 3,
-        item_id: 7
+        userId: 3,
+        itemId: 7
       },
       {
-        users_id: 3,
-        item_id: 8
+        userId: 3,
+        itemId: 8
       },
     ])
   },
@@ -198,7 +198,7 @@ module.exports = {
     await queryInterface.bulkDelete('boards', null, {});
     await queryInterface.bulkDelete('comments', null, {});
     await queryInterface.bulkDelete('images', null, {});
-    await queryInterface.bulkDelete('users_items', null, {});
+    await queryInterface.bulkDelete('UserItems', null, {});
     await queryInterface.bulkDelete('items', null, {});
   }
 };
