@@ -37,7 +37,7 @@ module.exports = {
         post_like: 3,
         post_dislike: 25,
         title: '새로운 요리법 개발했는데 완전 맛있어요!',
-        desciption: '추운 겨울날 밖에 나가서 라면을 드셔보세요. 어떠한 요리법보다 맛있습니다.'
+        description: '추운 겨울날 밖에 나가서 라면을 드셔보세요. 어떠한 요리법보다 맛있습니다.'
       },
       {
         users_id: 2,
@@ -47,7 +47,7 @@ module.exports = {
         description: '감기걸렸습니다. 배상해주세요.'
       },
       {
-        user_id: 3,
+        users_id: 3,
         post_like: 5,
         post_dislike: 1,
         title: '라면 맛있게 끓이는 법',
@@ -59,7 +59,7 @@ module.exports = {
         post_like: 6, 
         post_dislike: 3,
         title: '김치볶음밥 잘하는 법',
-        desciption: `김치를 먼저 기름에 잘 볶아주시고, 그다음 밥을 넣어 잘 볶아주시면 됩니다. 소스는 고추장을 넣어주시면 되고 김치국물 조금 넣어 더 맛있게
+        description: `김치를 먼저 기름에 잘 볶아주시고, 그다음 밥을 넣어 잘 볶아주시면 됩니다. 소스는 고추장을 넣어주시면 되고 김치국물 조금 넣어 더 맛있게
         요리하시면 됩니다.`
       }
     ])
@@ -67,25 +67,25 @@ module.exports = {
     await queryInterface.bulkInsert('comments', [
       {
         board_id: 1,
-        desciption: `이거 따라하지 마세요. 개떡같은 레시피네요. 신고넣습니다!`,
+        description: `이거 따라하지 마세요. 개떡같은 레시피네요. 신고넣습니다!`,
         comment_like: 3,
         comment_dislike: 2
       },
       {
         board_id: 2,
-        desciption: `네 맞습니다. 저도 따라했는데 감기에 걸렸어요ㅠㅠ`,
+        description: `네 맞습니다. 저도 따라했는데 감기에 걸렸어요ㅠㅠ`,
         comment_like: 3,
         comment_dislike: 1
       },
       {
         board_id: 3,
-        desciption: `정말 맛있네요! 다른 분들께도 추천드립니다!`,
+        description: `정말 맛있네요! 다른 분들께도 추천드립니다!`,
         comment_like: 12,
         comment_dislike: 5
       },
       {
         board_id: 2,
-        desciption: `이거 따라한사람이 바보 아니에요?ㅋㅋ`,
+        description: `이거 따라한사람이 바보 아니에요?ㅋㅋ`,
         comment_like: 1,
         comment_dislike: 5
       },
