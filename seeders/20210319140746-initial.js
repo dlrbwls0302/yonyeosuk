@@ -4,8 +4,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('users', [
-      {
+    await queryInterface.bulkInsert('users', [{
         email: 'parkhacker@gmail.com',
         password: '1q2w3e4r',
         nickname: '백종원',
@@ -30,9 +29,8 @@ module.exports = {
         updatedAt: new Date()
       },
     ]);
-    
-    await queryInterface.bulkInsert('boards', [
-      {
+
+    await queryInterface.bulkInsert('boards', [{
         users_id: 1,
         post_like: 3,
         post_dislike: 25,
@@ -52,11 +50,11 @@ module.exports = {
         post_dislike: 1,
         title: '라면 맛있게 끓이는 법',
         description: `라면을 맛있게 끓이려면 먼저 물을 설명에 적힌만큼 넣어주시고, 물이 끓으면 스프와 면을 넣어주세요.
-         그리고 나서 라면이 잘 익으면 계란과 파를 넣어 더 맛있게 끓이시면 됩니다.` 
+         그리고 나서 라면이 잘 익으면 계란과 파를 넣어 더 맛있게 끓이시면 됩니다.`
       },
       {
         users_id: 1,
-        post_like: 6, 
+        post_like: 6,
         post_dislike: 3,
         title: '김치볶음밥 잘하는 법',
         description: `김치를 먼저 기름에 잘 볶아주시고, 그다음 밥을 넣어 잘 볶아주시면 됩니다. 소스는 고추장을 넣어주시면 되고 김치국물 조금 넣어 더 맛있게
@@ -64,8 +62,7 @@ module.exports = {
       }
     ])
 
-    await queryInterface.bulkInsert('comments', [
-      {
+    await queryInterface.bulkInsert('comments', [{
         board_id: 1,
         description: `이거 따라하지 마세요. 개떡같은 레시피네요. 신고넣습니다!`,
         comment_like: 3,
@@ -91,8 +88,7 @@ module.exports = {
       },
     ])
 
-    await queryInterface.bulkInsert('images', [
-      {
+    await queryInterface.bulkInsert('images', [{
         board_id: 1,
         image: null
       },
@@ -118,8 +114,7 @@ module.exports = {
       },
     ])
 
- await queryInterface.bulkInsert('items', [
-      {
+    await queryInterface.bulkInsert('items', [{
         name: '두부'
       },
       {
@@ -145,8 +140,7 @@ module.exports = {
       },
     ])
 
-    await queryInterface.bulkInsert('UserItems', [
-      {
+    await queryInterface.bulkInsert('UserItems', [{
         userId: 1,
         itemId: 1
       },
@@ -190,7 +184,7 @@ module.exports = {
         userId: 3,
         itemId: 8
       },
-    ]) 
+    ])
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -198,7 +192,7 @@ module.exports = {
     await queryInterface.bulkDelete('boards', null, {});
     await queryInterface.bulkDelete('comments', null, {});
     await queryInterface.bulkDelete('images', null, {});
-   // await queryInterface.bulkDelete('UserItems', null, {});
+    await queryInterface.bulkDelete('UserItems', null, {});
     await queryInterface.bulkDelete('items', null, {});
   }
 };
