@@ -3,7 +3,23 @@ const { board } = require("../models");
 
 module.exports = {
     getBoard: async (req, res) => {
-
+        const boardData = await board.findAll();
+        const reversedBoard = boardData.dataValues;
+        reversedBoard.reverse();
+        const startNum = (req.body.page - 1) * 20;
+        const endNum = startNum + 20;
+        const slicedBoards = reversedBoard.slice(startNum, endNum);
+        const result = slicedBoards.map(slicedBoard => {
+            return {
+                id: slicedBoard.id,
+                title: slicedBoard.title,
+                createdAt: slicedBoard.createdAt
+            }
+        })
+        res.status(200).json({
+            board: result
+        })
+    
     },
     getPost: async (req, res) => {
         
