@@ -66,6 +66,7 @@ module.exports = {
             console.log(err);
         })
         res.send('sdasd');
+        // 실제 이미지를 폴더에 접근해서 주기 내일월요일!
     },
     
     writePost: async (req, res) => {
@@ -123,5 +124,6 @@ module.exports = {
         })
         .then(res => console.lod(res))
         .catch(err => console.log(err))
+        res.send('잘 삭제되었습니다!')
     }
 }
