@@ -36,7 +36,7 @@ db.Sequelize = Sequelize;
 
 // 일대다
 // users_items <-> items, users <-> users_items, users <-> board, board <-> images, board <-> comment
-const { board, comment, image, item, user, users_item } = sequelize.models;
+const { board, comment, image, item, user } = sequelize.models;
 
 board.hasMany(comment);
 comment.belongsTo(board);
@@ -47,10 +47,10 @@ image.belongsTo(board);
 user.hasMany(board);
 board.belongsTo(user);
 
-user.hasMany(users_item);
-users_item.belongsTo(user);
+user.belongsToMany(item, { through: 'UserItems' });
+item.belongsToMany(user, { through: 'UserItems' });
 
-items.hasMany(users_item);
-users_item.belongsTo(items);
+//user.hasMany(item);
+//item.belongsToMany(user, { through: users_item });
 
 module.exports = db;

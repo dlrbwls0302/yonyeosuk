@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Image.init({
-    board_id: DataTypes.INTEGER,
+    boardId: DataTypes.INTEGER,
     image: DataTypes.BLOB
   }, {
     sequelize,
