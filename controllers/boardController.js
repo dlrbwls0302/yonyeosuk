@@ -4,32 +4,46 @@ const { board } = require("../models");
 module.exports = {
     getBoard: async (req, res) => {
         const boardData = await board.findAll({
-	  attributes: {
-            exclude: ['userId']
-          }
-        });
-        boardData.reverse();
-       
-        const startNum = (req.body.page - 1) * 20;
-        const endNum = startNum + 20;
-
-        const slicedBoards = boardData.slice(startNum, endNum);
-        const result = slicedBoards.map(slicedBoard => {
-            console.log(slicedBoard.dataValues);
-            return {
-                id: slicedBoard.dataValues.id,
-                title: slicedBoard.dataValues.title,
-                createdAt: slicedBoard.dataValues.createdAt
+            attributes: {
+                exclude: ['userId']
             }
-        })
-        res.status(200).json({
-            board: result
-        })
+        });
+        if(boardData){
+            boardData.reverse();
+            if(typeof req.body.page === 'number' && req.body.page < 1){
+                res.status(404).json({
+                    message: "Board does not exist."
+                })
+            } else {
+                const startNum = (req.body.page - 1) * 20;
+                const endNum = startNum + 20;
+
+                const slicedBoards = boardData.slice(startNum, endNum);
+                const result = slicedBoards.map(slicedBoard => {
+                    console.log(slicedBoard.dataValues);
+                    return {
+                        id: slicedBoard.dataValues.id,
+                        title: slicedBoard.dataValues.title,
+                        createdAt: slicedBoard.dataValues.createdAt
+                    }
+                })
+                res.status(200).json({
+                    board: result
+                })
+            }
+        } else{
+            res.status(500).json({
+                message: "Server error has occurred."
+            })
+        }
+
+        
     
     },
     getPost: async (req, res) => {
-        
+  
     },
+    
     writePost: async (req, res) => {
         const { title, description } = req.body
         if (title && description) {
