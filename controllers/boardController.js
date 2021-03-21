@@ -1,5 +1,6 @@
 const { image } = require("../models");
 const { board } = require("../models");
+const { comment } = require("../models");
 
 module.exports = {
     getBoard: async (req, res) => {
@@ -41,6 +42,14 @@ module.exports = {
                 model: image,
                 attributes: {
                    include: ['id', 'image']
+                },
+                where: {
+                    boardId: postid
+                }
+            }, {
+                model: comment,
+                attributes: {
+                    include: ['id', 'comment', 'comment_like', 'comment_dislike']
                 },
                 where: {
                     boardId: postid
