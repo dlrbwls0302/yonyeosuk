@@ -36,12 +36,28 @@ module.exports = {
                 message: "Server error has occurred."
             })
         }
-
-        
-    
     },
+
     getPost: async (req, res) => {
-  
+        const { postid } = req.params;
+        board.findOne({ 
+            include: [{
+                model: image,
+                attributes: ['id', 'image'],
+                where: {
+                    board_id: postid
+                }
+            }],
+            where: {
+                id: postid
+            }
+        })
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
     },
     
     writePost: async (req, res) => {
@@ -85,9 +101,11 @@ module.exports = {
             })
         }
     },
+
     updatePost: async (req, res) => {
         //1
     },
+
     deletePost: async (req, res) => {
         //1//
     }
