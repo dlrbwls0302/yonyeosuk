@@ -115,6 +115,13 @@ module.exports = {
     },
 
     deletePost: async (req, res) => {
-        //1//
+        const { postid } = req.params;
+        board.destroy({
+            where: {
+                id: postid
+            }
+        })
+        .then(res => console.lod(res))
+        .catch(err => console.log(err))
     }
 }
