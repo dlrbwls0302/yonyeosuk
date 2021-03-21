@@ -3,11 +3,7 @@ const { board } = require("../models");
 
 module.exports = {
     getBoard: async (req, res) => {
-        const boardData = await board.findAll({
-            attributes: {
-                exclude: ['userId']
-            }
-        });
+        const boardData = await board.findAll();
         if(boardData){
             boardData.reverse();
             if(typeof req.body.page === 'number' && req.body.page < 1){
