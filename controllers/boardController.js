@@ -49,7 +49,7 @@ module.exports = {
             }, {
                 model: comment,
                 attributes: {
-                    include: ['id', 'comment', 'comment_like', 'comment_dislike']
+                    include: ['id', 'description', 'comment_like', 'comment_dislike']
                 },
                 where: {
                     boardId: postid
@@ -60,7 +60,7 @@ module.exports = {
             }
         })
         .then(res => {
-            console.log(res);
+            console.log(res.images[0], res.comments[0]);
         })
         .catch(err => {
             console.log(err);
