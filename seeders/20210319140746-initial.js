@@ -31,21 +31,21 @@ module.exports = {
     ]);
 
     await queryInterface.bulkInsert('boards', [{
-        users_id: 1,
+        userId: 1,
         post_like: 3,
         post_dislike: 25,
         title: '새로운 요리법 개발했는데 완전 맛있어요!',
         description: '추운 겨울날 밖에 나가서 라면을 드셔보세요. 어떠한 요리법보다 맛있습니다.'
       },
       {
-        users_id: 2,
+        userId: 2,
         post_like: 9,
         post_dislike: 3,
         title: '방금 위에 새로운 요리법 개발한 사람말 듣고 밖에나가서 라면먹었는데',
         description: '감기걸렸습니다. 배상해주세요.'
       },
       {
-        users_id: 3,
+        userId: 3,
         post_like: 5,
         post_dislike: 1,
         title: '라면 맛있게 끓이는 법',
@@ -53,7 +53,7 @@ module.exports = {
          그리고 나서 라면이 잘 익으면 계란과 파를 넣어 더 맛있게 끓이시면 됩니다.`
       },
       {
-        users_id: 1,
+        userId: 1,
         post_like: 6,
         post_dislike: 3,
         title: '김치볶음밥 잘하는 법',
@@ -63,25 +63,25 @@ module.exports = {
     ])
 
     await queryInterface.bulkInsert('comments', [{
-        board_id: 1,
+        boardId: 1,
         description: `이거 따라하지 마세요. 개떡같은 레시피네요. 신고넣습니다!`,
         comment_like: 3,
         comment_dislike: 2
       },
       {
-        board_id: 2,
+        boardId: 2,
         description: `네 맞습니다. 저도 따라했는데 감기에 걸렸어요ㅠㅠ`,
         comment_like: 3,
         comment_dislike: 1
       },
       {
-        board_id: 3,
+        boardId: 3,
         description: `정말 맛있네요! 다른 분들께도 추천드립니다!`,
         comment_like: 12,
         comment_dislike: 5
       },
       {
-        board_id: 2,
+        boardId: 2,
         description: `이거 따라한사람이 바보 아니에요?ㅋㅋ`,
         comment_like: 1,
         comment_dislike: 5
@@ -89,27 +89,27 @@ module.exports = {
     ])
 
     await queryInterface.bulkInsert('images', [{
-        board_id: 1,
+        boardId: 1,
         image: null
       },
       {
-        board_id: 2,
+        boardId: 2,
         image: null
       },
       {
-        board_id: 2,
+        boardId: 2,
         image: null
       },
       {
-        board_id: 3,
+        boardId: 3,
         image: null
       },
       {
-        board_id: 3,
+        boardId: 3,
         image: null
       },
       {
-        board_id: 3,
+        boardId: 3,
         image: null
       },
     ])

@@ -18,14 +18,14 @@ app.use(express.json());
 
 // 서버 연결 성공시
 app.get('/', async (req, res) => {
-   await board.findAll({
-        attributes: {
-            exclude: ['userId']
-        },
+    board.findAll({
         where: {
             users_id: 1 
         }
     })
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+    
     res.status(200).json({
         response: '연결에 성공하였습니다!'
     })
