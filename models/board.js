@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Board.init({
-    users_id: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
     post_like: {
       type: DataTypes.INTEGER,
       defaultValue: 0

@@ -16,7 +16,7 @@ module.exports = {
 
                 const slicedBoards = boardData.slice(startNum, endNum);
                 const result = slicedBoards.map(slicedBoard => {
-                    console.log(slicedBoard.dataValues);
+                   // console.log(slicedBoard.dataValues);
                     return {
                         id: slicedBoard.dataValues.id,
                         title: slicedBoard.dataValues.title,
@@ -43,7 +43,7 @@ module.exports = {
                    include: ['id', 'image']
                 },
                 where: {
-                    board_id: postid
+                    boardId: postid
                 }
             }],
             where: {
