@@ -10,7 +10,7 @@ module.exports = {
     await queryInterface.addConstraint('boards', {
       fields: ['userId'],
       type: 'foreign key',
-      name: 'custom_fkey_constraint_name',
+      name: 'boards_userId',
       references: {
         table: 'users',
         field: 'id'
@@ -26,7 +26,7 @@ module.exports = {
     await queryInterface.addConstraint('images', {
       fields: ['boardId'],
       type: 'foreign key',
-      name: 'custom_fkey_constraint_board_id2',
+      name: 'images_boardId',
       references: {
         table: 'boards',
         field: 'id'
@@ -42,7 +42,7 @@ module.exports = {
     await queryInterface.addConstraint('comments', {
       fields: ['boardId'],
       type: 'foreign key',
-      name: 'custom_fkey_constraint_board_id',
+      name: 'comments_boardId',
       references: {
         table: 'boards',
         field: 'id'
@@ -54,12 +54,12 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
 
-    await queryInterface.removeConstraint('boards', 'custom_fkey_constraint_name');
-
-    await queryInterface.renameColumn('boards', 'boardId', 'board_id');
-
+   // await queryInterface.renameColumn('boards', 'boardId', 'board_id');
+  // 삭제 -> 생성 -> 다시 애드콘스트레인트
+    await queryInterface.removeColumn('boards', 'userId');
+    await queryInterface.addColumn('boards', 'users_id', Sequelize.INTEGER);
     await queryInterface.addConstraint('boards', {
-      fields: ['board_id'],
+      fields: ['users_id'],
       type: 'foreign key',
       name: 'custom_fkey_constraint_name',
       references: {
@@ -70,9 +70,10 @@ module.exports = {
       onUpdate: 'cascade'
     })
   
-    await queryInterface.removeConstraint('images', 'custom_fkey_constraint_board_id2');
-
-    await queryInterface.renameColumn('images', 'boardId', 'board_id');
+   // await queryInterface.removeConstraint('images', 'images_boardId');
+    await queryInterface.removeColumn('images', 'boardId');
+    await queryInterface.addColumn('images', 'board_id', Sequelize.INTEGER);
+   // await queryInterface.renameColumn('images', 'boardId', 'board_id');
 
     await queryInterface.addConstraint('images', {
       fields: ['board_id'],
@@ -86,10 +87,11 @@ module.exports = {
       onUpdate: 'cascade'
     })
   
-    await queryInterface.removeConstraint('comments', 'custom_fkey_constraint_board_id');
+   // await queryInterface.removeConstraint('comments', 'comments_boardId');
 
-    await queryInterface.renameColumn('comments', 'boardId', 'board_id');
-
+   // await queryInterface.renameColumn('comments', 'boardId', 'board_id');
+    await queryInterface.removeColumn('comments', 'boardId');
+    await queryInterface.addColumn('comments', 'board_id', Sequelize.INTEGER);
     await queryInterface.addConstraint('comments', {
       fields: ['board_id'],
       type: 'foreign key',

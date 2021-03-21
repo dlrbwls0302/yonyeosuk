@@ -43,7 +43,10 @@ module.exports = {
         board.findOne({ 
             include: [{
                 model: image,
-                attributes: ['id', 'image'],
+                attributes: {
+                   exclude: ['userId'],
+                   include: ['id', 'image']
+                },
                 where: {
                     board_id: postid
                 }
@@ -58,6 +61,7 @@ module.exports = {
         .catch(err => {
             console.log(err);
         })
+        res.send('sdasd');
     },
     
     writePost: async (req, res) => {

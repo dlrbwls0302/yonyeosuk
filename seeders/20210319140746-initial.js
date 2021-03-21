@@ -5,6 +5,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('users', [{
+        id: 1,
         email: 'parkhacker@gmail.com',
         password: '1q2w3e4r',
         nickname: '백종원',
@@ -13,6 +14,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
+        id: 2,
         email: 'hoyong@codestates.com',
         password: 'hoyongking123',
         nickname: '코드스테이츠 마스코트',
@@ -21,6 +23,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
+        id: 3,
         email: 'codingking@naver.com',
         password: 'codeking1',
         nickname: '요리킹조리킹',
@@ -31,6 +34,7 @@ module.exports = {
     ]);
 
     await queryInterface.bulkInsert('boards', [{
+        id: 1,
         userId: 1,
         post_like: 3,
         post_dislike: 25,
@@ -38,6 +42,7 @@ module.exports = {
         description: '추운 겨울날 밖에 나가서 라면을 드셔보세요. 어떠한 요리법보다 맛있습니다.'
       },
       {
+        id : 2,
         userId: 2,
         post_like: 9,
         post_dislike: 3,
@@ -45,6 +50,7 @@ module.exports = {
         description: '감기걸렸습니다. 배상해주세요.'
       },
       {
+        id: 3,
         userId: 3,
         post_like: 5,
         post_dislike: 1,
@@ -53,6 +59,7 @@ module.exports = {
          그리고 나서 라면이 잘 익으면 계란과 파를 넣어 더 맛있게 끓이시면 됩니다.`
       },
       {
+        id: 4,
         userId: 1,
         post_like: 6,
         post_dislike: 3,
@@ -114,28 +121,37 @@ module.exports = {
       },
     ])
 
-    await queryInterface.bulkInsert('items', [{
+    await queryInterface.bulkInsert('items', [
+      { 
+        id: 1,
         name: '두부'
       },
       {
+        id: 2,
         name: '김치'
       },
       {
+        id: 3,
         name: '양파'
       },
       {
+        id: 4,
         name: '파스타면'
       },
       {
+        id: 5, 
         name: '크림소스'
       },
       {
+        id: 6,
         name: '베이컨'
       },
       {
+        id: 7,
         name: '치즈'
       },
       {
+        id: 8,
         name: '토마토'
       },
     ])
