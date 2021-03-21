@@ -4,9 +4,9 @@ const { board } = require("../models");
 module.exports = {
     getBoard: async (req, res) => {
         const boardData = await board.findAll({
-	  attributes: {
-            exclude: ['userId']
-          }
+            attributes: {
+                exclude: ['userId']
+            }
         });
         boardData.reverse();
        
