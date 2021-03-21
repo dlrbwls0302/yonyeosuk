@@ -116,14 +116,40 @@ module.exports = {
     },
 
     deletePost: async (req, res) => {
-        const { postid } = req.params;
-        board.destroy({
-            where: {
-                id: postid
-            }
-        })
-        .then(res => console.lod(res))
-        .catch(err => console.log(err))
-        res.send('잘 삭제되었습니다!')
+        const {
+            postid
+        } = req.params;
+        board.findOne({
+                where: {
+                    id: postid
+                }
+            })
+            .then(res => {
+                if (res) {
+                    board.destroy({
+                            where: {
+                                id: postid
+                            }
+                        })
+                        .then(res => {
+                            if (res === 1) {
+                                res.status(200).json({
+                                    message: 'Successfully deleted!'
+                                })
+                            }
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            res.status(500).json({
+                                message: 'Server error has occurred.'
+                            })
+                        })
+                } else {
+                    res.status(404).json({
+                        message: 'post does not exist'
+                    })
+                }
+            })
+        // res.send('잘 삭제되었습니다!');
     }
 }
