@@ -8,28 +8,58 @@ module.exports = {
                 exclude: ['userId']
             }
         });
-        boardData.reverse();
-       
-        const startNum = (req.body.page - 1) * 20;
-        const endNum = startNum + 20;
+        if(boardData){
+            boardData.reverse();
+            if(typeof req.body.page === 'number' && req.body.page < 1){
+                res.status(404).json({
+                    message: "Board does not exist."
+                })
+            } else {
+                const startNum = (req.body.page - 1) * 20;
+                const endNum = startNum + 20;
 
-        const slicedBoards = boardData.slice(startNum, endNum);
-        const result = slicedBoards.map(slicedBoard => {
-            console.log(slicedBoard.dataValues);
-            return {
-                id: slicedBoard.dataValues.id,
-                title: slicedBoard.dataValues.title,
-                createdAt: slicedBoard.dataValues.createdAt
+                const slicedBoards = boardData.slice(startNum, endNum);
+                const result = slicedBoards.map(slicedBoard => {
+                    console.log(slicedBoard.dataValues);
+                    return {
+                        id: slicedBoard.dataValues.id,
+                        title: slicedBoard.dataValues.title,
+                        createdAt: slicedBoard.dataValues.createdAt
+                    }
+                })
+                res.status(200).json({
+                    board: result
+                })
+            }
+        } else{
+            res.status(500).json({
+                message: "Server error has occurred."
+            })
+        }
+    },
+
+    getPost: async (req, res) => {
+        const { postid } = req.params;
+        board.findOne({ 
+            include: [{
+                model: image,
+                attributes: ['id', 'image'],
+                where: {
+                    board_id: postid
+                }
+            }],
+            where: {
+                id: postid
             }
         })
-        res.status(200).json({
-            board: result
+        .then(res => {
+            console.log(res);
         })
+        .catch(err => {
+            console.log(err);
+        })
+    },
     
-    },
-    getPost: async (req, res) => {
-        
-    },
     writePost: async (req, res) => {
         const { title, description } = req.body
         if (title && description) {
@@ -71,9 +101,11 @@ module.exports = {
             })
         }
     },
+
     updatePost: async (req, res) => {
         //1
     },
+
     deletePost: async (req, res) => {
         //1//
     }
