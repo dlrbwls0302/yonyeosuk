@@ -9,8 +9,8 @@ const searchRouter = require('./Routes/searchRouter');
 const boardRouter = require('./Routes/boardRouter');
 const app = express();
 const port = 5000;
-const dotenv = require('dotenv');
-dotenv.config();
+const dotenv = require('dotenv')
+dotenv.config()
 // AWS 설정
 const AWS = require('aws-sdk');
 AWS.config.update({
