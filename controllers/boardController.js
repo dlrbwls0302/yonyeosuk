@@ -124,15 +124,15 @@ module.exports = {
                     id: postid
                 }
             })
-            .then(res => {
-                if (res) {
+            .then(response => {
+                if (response) {
                     board.destroy({
                             where: {
                                 id: postid
                             }
                         })
-                        .then(res => {
-                            if (res === 1) {
+                        .then(response2 => {
+                            if (response2 === 1) {
                                 res.status(200).json({
                                     message: 'Successfully deleted!'
                                 })
