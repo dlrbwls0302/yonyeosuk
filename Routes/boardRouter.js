@@ -42,7 +42,7 @@ router.get('/:postid', boardController.getPost)
 
 router.post('/post/:id', accessTokenMiddleware.isValidToken, upload.array('image'), parser, boardController.writePost)
 
-router.post('/update/:postid', accessTokenMiddleware.isValidToken, boardController.updatePost)
+router.post('/update/:postid', accessTokenMiddleware.isValidToken, upload.array('image'), parser, boardController.updatePost)
 
 router.post('/delete/:postid', accessTokenMiddleware.isValidToken, boardController.deletePost)
 

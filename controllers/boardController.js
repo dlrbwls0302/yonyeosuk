@@ -114,7 +114,51 @@ module.exports = {
     },
 
     updatePost: async (req, res) => {
-        
+        const {
+            title,
+            description
+        } = req.body
+        if (title) {
+            const changedTitle = await board.update({
+                title: title,
+                where: {
+                    id: req.params.postid
+                }
+            })
+        }
+        if (description) {
+            const changedDes = await board.update({
+                description: description,
+                where: {
+                    id: req.params.postid
+                }
+            })
+        }
+        const imageInfo = req.files;
+        if (imageInfo) {
+            const imagePath = imageInfo.map(image => {
+                return {
+                    image: image.location,
+                    boardId: usersPostId.dataValues.id
+                }
+            });
+
+            const images = await image.bulkCreate(imagePath)
+            if (images[0].dataValues.id) {
+                res.status(201).json({
+                    message: 'Successfully updated!'
+                })
+            } else {
+                res.status(500).json({
+                    message: 'Server error has occurred!'
+                })
+            }
+
+        } else {
+            res.status(201).json({
+                message: 'Successfully updated but images are none'
+            })
+        }
     },
 
     deletePost: async (req, res) => {
