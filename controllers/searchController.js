@@ -1,5 +1,5 @@
 module.exports = {
-    serachPost : async (req, res) => {
-        
-    } 
+    serachPost: async (req, res) => {
+
+    }
 }

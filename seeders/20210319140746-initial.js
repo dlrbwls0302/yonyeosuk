@@ -42,7 +42,7 @@ module.exports = {
         description: '추운 겨울날 밖에 나가서 라면을 드셔보세요. 어떠한 요리법보다 맛있습니다.'
       },
       {
-        id : 2,
+        id: 2,
         userId: 2,
         post_like: 9,
         post_dislike: 3,
@@ -121,8 +121,7 @@ module.exports = {
       },
     ])
 
-    await queryInterface.bulkInsert('items', [
-      { 
+    await queryInterface.bulkInsert('items', [{
         id: 1,
         name: '두부'
       },
@@ -139,7 +138,7 @@ module.exports = {
         name: '파스타면'
       },
       {
-        id: 5, 
+        id: 5,
         name: '크림소스'
       },
       {
