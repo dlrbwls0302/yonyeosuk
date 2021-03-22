@@ -59,13 +59,14 @@ module.exports = {
                 id: postid
             }
         })
-        .then(res => {
-            console.log(res.images[0], res.comments[0]);
+        .then(response => {
+            res.status(200).json({
+                ...response
+            })
         })
         .catch(err => {
             console.log(err);
         })
-        res.send('sdasd');
     },
     
     writePost: async (req, res) => {

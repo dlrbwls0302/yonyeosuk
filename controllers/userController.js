@@ -114,9 +114,6 @@ module.exports = {
     socialLogin: async (req, res) => {
 
     },
-    myPageInfo: async (req, res) => {
-
-    },
     getUserPostList: async (req, res) => {
 
     }
