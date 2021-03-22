@@ -13,7 +13,7 @@ module.exports = {
             const boardData = await board.findAll();
             if (boardData) {
                 boardData.reverse();
-                if (typeof req.body.page === 'number' && req.body.page < 1) {
+                if ( req.body.page < 1) {
                     res.status(404).json({
                         message: "Board does not exist."
                     })
@@ -29,6 +29,9 @@ module.exports = {
                             title: slicedBoard.dataValues.title,
                             createdAt: slicedBoard.dataValues.createdAt
                         }
+                    })
+                    res.status(200).json({
+                        result
                     })
                 }
             } else {

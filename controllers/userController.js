@@ -118,15 +118,23 @@ module.exports = {
         const {
             id
         } = req.params;
+        console.log(id)
         if (Number(id) >= 1) {
             const usersBoard = await board.findAll({
                 where: {
                     userId: id
                 }
             });
-            if (usersBoard) {
+            if (usersBoard.length !== 0) {
+                const result = usersBoard.map(post => {
+                   return {
+                      id: post.dataValues.id,
+                      title: post.dataValues.title,
+                      createdAt: post.dataValues.createdAt
+                   }
+                })
                 res.status(200).json({
-                    userpost_list: usersBoard.dataValues
+                    userpost_list: result
                 })
             } else {
                 res.status(404).json({

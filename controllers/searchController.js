@@ -2,21 +2,28 @@ const { board } = require('../models');
 module.exports = {
     serachPost: async (req, res) => {
         const { query } = req.body;
-        if (query.length !== 0) {
+        if (query && query.length !== 0) {
             board.findAll()
             .then(response => {
-                return response.dataValues
+                return response
             })
             .then(posts => {
                 let filteredPosts = posts
                 for (let i = 0; i < query.length; i += 1) {
-                    filteredPosts = filteredPosts.filter(post => post.title.includes(query[i]))
+                    filteredPosts = filteredPosts.filter(post => post.dataValues.title.includes(query[i]))
                 }
                 return filteredPosts;
             })
             .then(finalPosts => {
+                const result = finalPosts.map(post => {
+                   return {
+                       id: post.id,
+                       title: post.title,
+                       createdAt: post.createdAt,
+                   }
+                })
                 res.status(200).json({
-                    searchList : finalPosts
+                    searchList : result
                 })  
             })
             .catch(err => {
