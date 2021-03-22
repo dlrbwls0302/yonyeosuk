@@ -96,8 +96,9 @@ writePost: async (req, res) => {
                 description: description,
                 userId: req.params.id
             })
-            // console.log(usersPostId)
+            console.log(usersPostId)
             const images = req.files;
+            console.log(images);
             if (images) {
                 const imagePath = images.map(image => {
                     return {
