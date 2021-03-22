@@ -35,7 +35,6 @@ module.exports = {
                             createdAt: slicedBoard.dataValues.createdAt
                         }
                     })
-                    })
                 }
             } else {
                 res.status(500).json({
@@ -44,52 +43,38 @@ module.exports = {
             }
         },
 
-        getPost: async (req, res) => {
-         /*   const { postid } = req.params;
-           console.log(typeof postid);
-           const postImages = await board.findByPk(postid, {
-             include: [{
-               model: image,
-               where: {
-                 boardId: postid
-               }
-             }]
-           })
-           const postComments = await board.findByPk(postid, {
-             include: [{
-               model: comment,
-               where: {
-                 boardId: postid               }
-             }]
-           })
-         /// const post = await board.findAll();
-          console.log(postImages); 
-          console.log(postComments);
-          if (Number(postid) >= 1) {
-            
-         /* board.findByPk(5, {
-                    attributes: ['title', 'description'],
-                    include: [{
-                        model: image,
-                        attributes: ['id', 'image'],
-                        where: {
-                            boardId: postid
-                        }
-                    }, {
-                        model: comment,
-                        attributes:  ['id', 'description', 'comment_like', 'comment_dislike'],
-                        where: {
-                            boardId: postid
-                        }
-                    }]
+    getPost: async (req, res) => {
+        const { postid } = req.params;
+        if (Number(postid) >= 1) {
+            const post = await board.findByPk(postid)
+            const postImages = await board.findByPk(postid, {
+                include: [{
+                  model: image,
+                  where: {
+                    boardId: postid
+                  }
+                }]
+              })
+              console.log(postImages)
+              const postComments = await board.findByPk(postid, {
+                include: [{
+                  model: comment,
+                  where: {
+                    boardId: postid
+                  }
+                }]
             })
-            .then(response => {
-                console.log(response)
+            console.log(postComments)
+            res.status(200).json({
+                post: post === null ? null : post.dataValues,
+                images: postImages === null ? null : postImages.dataValues.images,
+                comments: postComments === null ? null : postComments.dataValues.comments
             })
-            .catch(err => {
-              console.log(err);
-            })*/
-         
+        } else {
+            res.status(404).json({
+                message: '해당 글을 찾을 수가 없습니다!'
+            })
+        }
     },
 
     writePost: async (req, res) => {
