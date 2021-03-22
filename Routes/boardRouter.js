@@ -1,13 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require("body-parser")
-const parser = bodyParser.urlencoded({extended:false});
+const parser = bodyParser.urlencoded({
+    extended: false
+});
 const boardController = require('../controllers/boardController');
 const multer = require('multer');
 const upload = multer({
     dest: 'uploads/'
 })
-const accessTokenMiddleware = require('../utils/isValidToken') 
+const accessTokenMiddleware = require('../utils/isValidToken')
 
 router.get('/', boardController.getBoard)
 

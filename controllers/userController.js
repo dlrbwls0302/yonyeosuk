@@ -20,7 +20,7 @@ module.exports = {
                 'message': 'Invalid user'
             })
         } else {
-            user.findOne({ 
+            user.findOne({
                     include: [{
                         model: item,
                         attributes: ['id', 'name'],
@@ -45,14 +45,14 @@ module.exports = {
                     delete payload.password;
                     delete payload.createdAt;
                     delete payload.updatedAt;
-        
+
                     const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET, {
                         expiresIn: '1d'
                     });
                     const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET, {
                         expiresIn: '7d'
                     });
-        
+
                     res.cookie('refreshToken', refreshToken, {
                         domain: 'yonyeosuk.link',
                         path: '/',
@@ -114,9 +114,9 @@ module.exports = {
     socialLogin: async (req, res) => {
 
     },
-    myPageInfo: async (req, res) => {
+    // myPageInfo: async (req, res) => {
 
-    },
+    // },
     getUserPostList: async (req, res) => {
 
     }

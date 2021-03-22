@@ -5,9 +5,9 @@ const { comment } = require("../models");
 module.exports = {
     getBoard: async (req, res) => {
         const boardData = await board.findAll();
-        if(boardData){
+        if (boardData) {
             boardData.reverse();
-            if(typeof req.body.page === 'number' && req.body.page < 1){
+            if (typeof req.body.page === 'number' && req.body.page < 1) {
                 res.status(404).json({
                     message: "Board does not exist."
                 })
@@ -17,7 +17,7 @@ module.exports = {
 
                 const slicedBoards = boardData.slice(startNum, endNum);
                 const result = slicedBoards.map(slicedBoard => {
-                   // console.log(slicedBoard.dataValues);
+                    // console.log(slicedBoard.dataValues);
                     return {
                         id: slicedBoard.dataValues.id,
                         title: slicedBoard.dataValues.title,
@@ -28,7 +28,7 @@ module.exports = {
                     board: result
                 })
             }
-        } else{
+        } else {
             res.status(500).json({
                 message: "Server error has occurred."
             })
@@ -36,47 +36,52 @@ module.exports = {
     },
 
     getPost: async (req, res) => {
-        const { postid } = req.params;
-        board.findOne({ 
-            include: [{
-                model: image,
-                attributes: {
-                   include: ['id', 'image']
-                },
+        const {
+            postid
+        } = req.params;
+        board.findOne({
+                include: [{
+                    model: image,
+                    attributes: {
+                        include: ['id', 'image']
+                    },
+                    where: {
+                        boardId: postid
+                    }
+                }, {
+                    model: comment,
+                    attributes: {
+                        include: ['id', 'description', 'comment_like', 'comment_dislike']
+                    },
+                    where: {
+                        boardId: postid
+                    }
+                }],
                 where: {
-                    boardId: postid
+                    id: postid
                 }
-            }, {
-                model: comment,
-                attributes: {
-                    include: ['id', 'description', 'comment_like', 'comment_dislike']
-                },
-                where: {
-                    boardId: postid
-                }
-            }],
-            where: {
-                id: postid
-            }
-        })
-        .then(res => {
-            console.log(res.images[0], res.comments[0]);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            })
+            .then(res => {
+                console.log(res.images[0], res.comments[0]);
+            })
+            .catch(err => {
+                console.log(err);
+            })
         res.send('sdasd');
     },
-    
+
     writePost: async (req, res) => {
-        const { title, description } = req.body
+        const {
+            title,
+            description
+        } = req.body
         if (title && description) {
             const usersPostId = await board.create({
                 title: title,
                 description: description,
                 users_id: req.params.id
             })
-	   // console.log(usersPostId)
+            // console.log(usersPostId)
             const images = req.files;
             if (images) {
                 const path = images.map(image => {
@@ -85,19 +90,19 @@ module.exports = {
                         board_id: usersPostId.dataValues.id
                     }
                 });
-		console.log(path)
+                console.log(path)
                 if (path.length !== 0) {
-                   const images = await image.bulkCreate(path)
-                   if (images[0].dataValues.id) {
-                      res.status(201).json({
-                          message: 'Successfully created!'
-                      })
-                   } else {
-                     res.status(500).json({
-                         message: 'Server error has occurred!'
-                     })
-                   }
-		}
+                    const images = await image.bulkCreate(path)
+                    if (images[0].dataValues.id) {
+                        res.status(201).json({
+                            message: 'Successfully created!'
+                        })
+                    } else {
+                        res.status(500).json({
+                            message: 'Server error has occurred!'
+                        })
+                    }
+                }
             } else {
                 res.status(201).json({
                     message: 'Successfully created but images are none'
@@ -115,39 +120,41 @@ module.exports = {
     },
 
     deletePost: async (req, res) => {
-        const { postid } = req.params;
+        const {
+            postid
+        } = req.params;
         board.findOne({
-          where: {
-            id: postid
-          }
-        })
-        .then(response => {
-          if (response) {
+                where: {
+                    id: postid
+                }
+            })
+            .then(response => {
+                if (response) {
 
-        board.destroy({
-            where: {
-                id: postid
-            }
-        })
-        .then(response2 => {
-          if (response2 === 1) {
-            res.status(200).json({
-              message: 'Successfully deleted!'
+                    board.destroy({
+                            where: {
+                                id: postid
+                            }
+                        })
+                        .then(response2 => {
+                            if (response2 === 1) {
+                                res.status(200).json({
+                                    message: 'Successfully deleted!'
+                                })
+                            }
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            res.status(500).json({
+                                message: 'Server error has occurred.'
+                            })
+                        })
+                } else {
+                    res.status(404).json({
+                        message: 'post does not exist'
+                    })
+                }
             })
-          }
-        })
-        .catch(err => {
-          console.log(err)
-            res.status(500).json({
-              message: 'Server error has occurred.'
-            })
-         })
-        } else {
-          res.status(404).json({
-            message: 'post does not exist'
-          })
-        }
-      })
-       // res.send('잘 삭제되었습니다!');
+        // res.send('잘 삭제되었습니다!');
     }
 }
