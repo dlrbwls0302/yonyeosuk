@@ -120,22 +120,24 @@ module.exports = {
         } = req.body
         if (title) {
             const changedTitle = await board.update({
-                title: title,
+                title: title },{
                 where: {
                     id: req.params.postid
-                }
-            })
+               } 
+           })
         }
         if (description) {
             const changedDes = await board.update({
-                description: description,
-                where: {
+                description: description },
+                {
+                  where: {
                     id: req.params.postid
-                }
-            })
+                  }
+                })
         }
         const imageInfo = req.files;
-        if (imageInfo) {
+        if (imageInfo.length !== 0) {
+            const usersPostId = await board.findByPk(req.params.postid)
             const imagePath = imageInfo.map(image => {
                 return {
                     image: image.location,
@@ -143,7 +145,13 @@ module.exports = {
                 }
             });
 
-            const images = await image.bulkCreate(imagePath)
+            image.destroy({
+              where: {
+                boardId: req.params.postid
+              }
+            })
+            .then(async response => {
+              const images = await image.bulkCreate(imagePath)
             if (images[0].dataValues.id) {
                 res.status(201).json({
                     message: 'Successfully updated!'
@@ -153,6 +161,7 @@ module.exports = {
                     message: 'Server error has occurred!'
                 })
             }
+         })
 
         } else {
             res.status(201).json({
