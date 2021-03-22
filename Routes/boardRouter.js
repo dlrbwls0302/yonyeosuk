@@ -5,7 +5,17 @@ const parser = bodyParser.urlencoded({extended:false});
 const boardController = require('../controllers/boardController');
 const multer = require('multer');
 const upload = multer({
-    dest: 'uploads/'
+    storage: multerS3({
+        s3: s3, 
+        bucket: 's3://www.yonyeosuk.link/images/',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        acl: 'public-read',
+        key: (req, file, cb) => {
+            console.log(file);
+            cb(null, file.originalname)
+        },
+    }),
+    limits: { fileSize: 5 * 1024 * 1024 }
 })
 const accessTokenMiddleware = require('../utils/isValidToken') 
 

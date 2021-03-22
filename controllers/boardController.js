@@ -1,6 +1,11 @@
 const { image } = require("../models");
 const { board } = require("../models");
 const { comment } = require("../models");
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const fs = require('fs');
+const path = require('path');
+const AWS = require('aws-sdk');
 
 module.exports = {
     getBoard: async (req, res) => {
@@ -68,27 +73,27 @@ module.exports = {
             console.log(err);
         })
     },
-    
+
     writePost: async (req, res) => {
         const { title, description } = req.body
         if (title && description) {
             const usersPostId = await board.create({
                 title: title,
                 description: description,
-                users_id: req.params.id
+                userId: req.params.id
             })
 	   // console.log(usersPostId)
             const images = req.files;
             if (images) {
-                const path = images.map(image => {
+                const imagePath = images.map(image => {
                     return {
-                        image: image.path,
-                        board_id: usersPostId.dataValues.id
+                        image: image.location,
+                        boardId: usersPostId.dataValues.id
                     }
                 });
-		console.log(path)
-                if (path.length !== 0) {
-                   const images = await image.bulkCreate(path)
+		    console.log(imagePath)
+                if (imagePath.length !== 0) {
+                   const images = await image.bulkCreate(imagePath)
                    if (images[0].dataValues.id) {
                       res.status(201).json({
                           message: 'Successfully created!'
