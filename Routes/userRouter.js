@@ -11,7 +11,7 @@ router.post('/signup', userController.signup)
 
 router.post('/social-login', userController.socialLogin)
 
-router.get('/:id/info', accessTokenMiddleware.isValidToken, userController.myPageInfo)
+//router.get('/:id/info', accessTokenMiddleware.isValidToken, userController.myPageInfo)
 
 router.get('/:id/postlist', accessTokenMiddleware.isValidToken, userController.getUserPostList)
 
