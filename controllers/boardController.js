@@ -87,37 +87,32 @@ module.exports = {
 
     writePost: async (req, res) => {
         const { title, description } = req.body
-        res.send('post upload')
-       /*
         if (title && description) {
             const usersPostId = await board.create({
                 title: title,
                 description: description,
                 userId: req.params.id
             })
-            console.log(usersPostId)
             const images = req.files;
-            console.log(images);
-            if (images) {
+            if (images && images.length !== 0) {
                 const imagePath = images.map(image => {
                     return {
                         image: image.location,
                         boardId: usersPostId.dataValues.id
                     }
                 });
-                console.log(imagePath)
-                if (imagePath.length !== 0) {
-                    const images = await image.bulkCreate(imagePath)
-                    if (images[0].dataValues.id) {
-                        res.status(201).json({
-                            message: 'Successfully created!'
-                        })
-                    } else {
-                        res.status(500).json({
-                            message: 'Server error has occurred!'
-                        })
-                    }
+                
+                const images = await image.bulkCreate(imagePath)
+                if (images[0].dataValues.id) {
+                    res.status(201).json({
+                        message: 'Successfully created!'
+                    })
+                } else {
+                    res.status(500).json({
+                        message: 'Server error has occurred!'
+                    })
                 }
+                
             } else {
                 res.status(201).json({
                     message: 'Successfully created but images are none'
@@ -127,7 +122,7 @@ module.exports = {
             res.status(400).json({
                 message: "제목과 본문은 필수 항목입니다!"
             })
-        }*/
+        }
     },
 
     updatePost: async (req, res) => {
