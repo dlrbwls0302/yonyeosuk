@@ -20,7 +20,7 @@ app.use(express.json());
 app.get('/', async (req, res) => {
     board.findAll({
         where: {
-            users_id: 1 
+            usersId: 1 
         }
     })
     .then(res => console.log(res))
