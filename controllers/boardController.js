@@ -74,15 +74,14 @@ module.exports = {
                     id: postid
                 }
             
-        })
-        .then(response => {
-           res.status(200).json({
-            ...response
-           })
-        })
-        .catch(err => {
-          console.log(err);
-        })
+            })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(err => {
+              console.log(err);
+            })
+            res.send('dsadasdas!')
     },
 
     writePost: async (req, res) => {
