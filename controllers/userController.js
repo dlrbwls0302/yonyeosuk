@@ -1,7 +1,7 @@
 const {
     user,
     item,
-    users_item
+    board
 } = require("../models");
 const jwt = require("jsonwebtoken");
 const dotenv = require('dotenv');
@@ -115,6 +115,26 @@ module.exports = {
 
     },
     getUserPostList: async (req, res) => {
-        
+        const { id } = req.params;
+        if(id >= 1){
+            const board = await board.findAll({
+                where: {
+                    userId: id
+                }
+             });
+            if(board){
+                res.status(200).json({
+                    userpost_list: board
+                })
+            } else{
+                res.status(404).json({
+                    message: '해당 유저가 쓴 게시글이 없습니다.'
+                })
+            }
+        } else{
+            res.status(401).json({
+                message: "Invalid access token" 
+            })
+        }
     }
 }
