@@ -7,11 +7,6 @@ const {
 const {
     comment
 } = require("../models");
-const multer = require('multer');
-const multerS3 = require('multer-s3');
-const fs = require('fs');
-const path = require('path');
-const AWS = require('aws-sdk');
 
 module.exports = {
         getBoard: async (req, res) => {
@@ -55,7 +50,6 @@ module.exports = {
                   }
                 }]
               })
-              console.log(postImages)
               const postComments = await board.findByPk(postid, {
                 include: [{
                   model: comment,
@@ -64,7 +58,6 @@ module.exports = {
                   }
                 }]
             })
-            console.log(postComments)
             res.status(200).json({
                 post: post === null ? null : post.dataValues,
                 images: postImages === null ? null : postImages.dataValues.images,
@@ -86,7 +79,6 @@ module.exports = {
                 userId: req.params.id
             })
             const imageInfo = req.files;
-            console.log(req.files);
             if (imageInfo) {
                 const imagePath = imageInfo.map(image => {
                     return {

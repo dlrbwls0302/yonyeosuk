@@ -1,9 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { user } = require('./models');
 const { board } = require('./models');
-//const bodyParser = require('body-parser');
-// Router
 const userRouter = require('./Routes/userRouter');
 const searchRouter = require('./Routes/searchRouter');
 const boardRouter = require('./Routes/boardRouter');
@@ -11,21 +8,9 @@ const app = express();
 const port = 5000;
 const dotenv = require('dotenv')
 dotenv.config()
-// AWS 설정
-//const AWS = require('aws-sdk');
-//AWS.config.update({
-//    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-//    region : 'ap-northeast-2'
-//});
-
 
 app.use(cors()); // 설정은 나중에
 app.use(express.json());
-//app.use(bodyParser.urlencoded({
-//  extended: true
-//}));
-
 // 서버 연결 성공시
 app.get('/', async (req, res) => {
     board.findAll({
