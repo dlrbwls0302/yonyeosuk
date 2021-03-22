@@ -112,7 +112,7 @@ module.exports = {
         })
     },
     socialLogin: async (req, res) => {
-
+        
     },
     getUserPostList: async (req, res) => {
 

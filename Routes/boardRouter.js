@@ -36,8 +36,6 @@ const upload = multer({
     storage: storage
 })
 
-//const accessTokenMiddleware = require('../utils/isValidToken') 
-
 router.get('/', boardController.getBoard)
 
 router.get('/:postid', boardController.getPost)
