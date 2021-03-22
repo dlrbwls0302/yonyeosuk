@@ -4,7 +4,7 @@
     "password": "cr7!cr7!",
     "database": "thiscook_server",
     "host": "http://a-w-s-rdspractice.c8dgfm7ca42w.ap-northeast-2.rds.amazonaws.com",
-    "dialect": "mysql",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
