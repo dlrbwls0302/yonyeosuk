@@ -75,21 +75,20 @@ module.exports = {
                 }
             
         })
-    .then(response => {
-        res.status(200).json({
+        .then(response => {
+           res.status(200).json({
             ...response
+           })
         })
-    })
-    .catch(err => {
-        console.log(err);
-    })
-},
+        .catch(err => {
+          console.log(err);
+        })
+    },
 
-writePost: async (req, res) => {
-        const {
-            title,
-            description
-        } = req.body
+    writePost: async (req, res) => {
+        const { title, description } = req.body
+        res.send('post upload')
+       /*
         if (title && description) {
             const usersPostId = await board.create({
                 title: title,
@@ -128,7 +127,7 @@ writePost: async (req, res) => {
             res.status(400).json({
                 message: "제목과 본문은 필수 항목입니다!"
             })
-        }
+        }*/
     },
 
     updatePost: async (req, res) => {
