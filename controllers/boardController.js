@@ -114,7 +114,7 @@ module.exports = {
     },
 
     updatePost: async (req, res) => {
-            //1
+        
     },
 
     deletePost: async (req, res) => {
