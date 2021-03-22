@@ -88,6 +88,7 @@ module.exports = {
     writePost: async (req, res) => {
         const { title, description } = req.body
         res.send('post upload')
+        console.log(req.files);
        /*
         if (title && description) {
             const usersPostId = await board.create({
