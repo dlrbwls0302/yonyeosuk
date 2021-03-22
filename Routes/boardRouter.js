@@ -6,6 +6,9 @@ const parser = bodyParser.urlencoded({
 });
 const boardController = require('../controllers/boardController');
 const multer = require('multer');
+const AWS = require("aws-sdk");
+/*AWS.config.loadFromPath("../config/awsconfig.json");
+let s3 = new AWS.S3();
 const upload = multer({
     storage: multerS3({
         s3: s3, 
@@ -19,6 +22,7 @@ const upload = multer({
     }),
     limits: { fileSize: 5 * 1024 * 1024 }
 })
+*/
 const accessTokenMiddleware = require('../utils/isValidToken')
 
 router.get('/', boardController.getBoard)

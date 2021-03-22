@@ -12,12 +12,12 @@ const port = 5000;
 const dotenv = require('dotenv')
 dotenv.config()
 // AWS 설정
-const AWS = require('aws-sdk');
-AWS.config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region : 'ap-northeast-2'
-});
+//const AWS = require('aws-sdk');
+//AWS.config.update({
+//    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+//    region : 'ap-northeast-2'
+//});
 
 
 app.use(cors()); // 설정은 나중에
