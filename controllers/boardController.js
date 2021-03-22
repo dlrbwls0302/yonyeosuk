@@ -46,42 +46,34 @@ module.exports = {
             }
         },
 
-        getPost: async (req, res) => {
-            const { postid } = req.params;
-            board.findOne({
-                    include: [{
-                        model: image,
-                        attributes: {
-                            include: ['id', 'image']
-                        },
-                        where: {
-                            boardId: postid
-                        }
-                    }, {
-                        model: comment,
-                        attributes: {
-                            include: ['id', 'description', 'comment_like', 'comment_dislike']
-                        },
-                        where: {
-                            boardId: postid
-                        }
-                    }],
-                    where: {
-                        id: postid
-                    }
-                ,
-                where: {
-                    id: postid
-                }
-            
+    getPost: async (req, res) => {
+        const { postid } = req.params;
+        if (Number(postid) >= 1) {
+            const postImages = await board.findByPk(postid, {
+                include: [{
+                  model: image,
+                  where: {
+                    boardId: postid
+                  }
+                }]
+              })
+              const postComments = await board.findByPk(postid, {
+                include: [{
+                  model: comment,
+                  where: {
+                    boardId: postid
+                  }
+                }]
             })
-            .then(response => {
-                console.log(response)
+            res.status(200).json({
+                ...postImages.dataValues,
+                comments: postComments.dataValues.comments
             })
-            .catch(err => {
-              console.log(err);
+        } else {
+            res.status(404).json({
+                message: '해당 글을 찾을 수가 없습니다!'
             })
-            res.send('dsadasdas!')
+        }
     },
 
     writePost: async (req, res) => {
