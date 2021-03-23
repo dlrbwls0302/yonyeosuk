@@ -36,7 +36,7 @@ const upload = multer({
     storage: storage
 })
 
-router.get('/', boardController.getBoard)
+router.post('/', boardController.getBoard)
 
 router.get('/:postid', boardController.getPost)
 
