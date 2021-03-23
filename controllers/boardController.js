@@ -82,7 +82,7 @@ module.exports = {
                 userId: req.params.id
             })
             const imageInfo = req.files;
-            if (imageInfo) {
+            if (imageInfo.length !== 0) {
                 const imagePath = imageInfo.map(image => {
                     return {
                         image: image.location,
