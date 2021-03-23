@@ -118,7 +118,6 @@ module.exports = {
         const {
             id
         } = req.params;
-        console.log(id)
         if (Number(id) >= 1) {
             const usersBoard = await board.findAll({
                 where: {

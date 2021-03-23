@@ -8,7 +8,7 @@ module.exports = {
         const authorization = req.headers['authorization'];
         if (authorization) {
             const accessToken = authorization.split(' ')[1];
-            const decoded = jwt.verify(accessToken, process.env.ACCESS_SECRET, async (err, decoded) => {
+            jwt.verify(accessToken, process.env.ACCESS_SECRET, async (err, decoded) => {
                 if (err) {
                     res.status(401).json({
                         message: 'Invalid access token'

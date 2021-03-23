@@ -118,26 +118,36 @@ module.exports = {
             title,
             description
         } = req.body
+        const { postid } = req.params;
+        const post = await board.findByPk(postid)
+        
+        if (!post) {
+            res.status(404).json({
+                message: '해당 글을 찾을 수 없습니다!'
+            })
+        }
+        
         if (title) {
-            const changedTitle = await board.update({
-                title: title },{
+            await board.update({
+                title: title
+            }, {
                 where: {
-                    id: req.params.postid
-               } 
-           })
+                    id: postid
+                }
+            })
         }
         if (description) {
-            const changedDes = await board.update({
-                description: description },
-                {
-                  where: {
-                    id: req.params.postid
-                  }
-                })
+            await board.update({
+                description: description
+            }, {
+                where: {
+                    id: postid
+                }
+            })
         }
         const imageInfo = req.files;
         if (imageInfo.length !== 0) {
-            const usersPostId = await board.findByPk(req.params.postid)
+            const usersPostId = await board.findByPk(postid)
             const imagePath = imageInfo.map(image => {
                 return {
                     image: image.location,
@@ -146,22 +156,22 @@ module.exports = {
             });
 
             image.destroy({
-              where: {
-                boardId: req.params.postid
-              }
-            })
-            .then(async response => {
-              const images = await image.bulkCreate(imagePath)
-            if (images[0].dataValues.id) {
-                res.status(201).json({
-                    message: 'Successfully updated!'
+                    where: {
+                        boardId: postid
+                    }
                 })
-            } else {
-                res.status(500).json({
-                    message: 'Server error has occurred!'
+                .then(async response => {
+                    const images = await image.bulkCreate(imagePath)
+                    if (images[0].dataValues.id) {
+                        res.status(201).json({
+                            message: 'Successfully updated!'
+                        })
+                    } else {
+                        res.status(500).json({
+                            message: 'Server error has occurred!'
+                        })
+                    }
                 })
-            }
-         })
 
         } else {
             res.status(201).json({
